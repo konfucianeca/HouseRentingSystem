@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using static HouseRentingSystem.Infrastructure.Data.Constants.DataConstants;
+using static HouseRentingSystem.Infrastructure.Constants.DataConstants;
 
 
 namespace HouseRentingSystem.Infrastructure.Data.Models
