@@ -2,7 +2,7 @@
 
 namespace HouseRentingSystem.Extensions
 {
-    public static class ClamsPrincipalExtensions
+    public static class ClamesPrincipalExtensions
     {
         public static string Id(this ClaimsPrincipal user)
         {
