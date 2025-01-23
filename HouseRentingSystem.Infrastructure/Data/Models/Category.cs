@@ -13,7 +13,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(CategoryNameMaxLenght)]
+        [MaxLength(CategoryNameMaxLength)]
         [Comment("Category name")]
         public string Name { get; set; } = string.Empty;
         public List<House> Houses { get; set; } = new List<House>();

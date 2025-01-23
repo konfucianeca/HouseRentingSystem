@@ -15,7 +15,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(AgentPhoneNumberMaxLenght)]
+        [MaxLength(AgentPhoneNumberMaxLength)]
         [Comment("Agent phone number")]
         public string PhoneNumber { get; set; } = string.Empty;
 
