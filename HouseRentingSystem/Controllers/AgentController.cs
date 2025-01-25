@@ -1,7 +1,6 @@
 ﻿using HouseRentingSystem.Attributes;
 using HouseRentingSystem.Core.Contracts;
 using HouseRentingSystem.Core.Models.Agent;
-using HouseRentingSystem.Core.Services;
 using HouseRentingSystem.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using static HouseRentingSystem.Core.Constants.MessageConstants;
