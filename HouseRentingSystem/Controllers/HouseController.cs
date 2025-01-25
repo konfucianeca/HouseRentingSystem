@@ -51,7 +51,7 @@ namespace HouseRentingSystem.Controllers
                 Categories = await houseService.AllCategoriesAsync()
             };
 
-            return View();
+            return View(model);
         }
 
         [HttpPost]

@@ -8,13 +8,13 @@ namespace HouseRentingSystem.Core.Models.House
     {
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(HouseTitleMaxLength,
-            MinimumLength = HouseAddressMinLength,
+            MinimumLength = HouseTitleMinLength,
             ErrorMessage = StringLengthMessage)]
         public string Title { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(HouseAddressMaxLength,
-            MinimumLength =HouseAddressMinLength,
+            MinimumLength = HouseAddressMinLength,
             ErrorMessage = StringLengthMessage)]
         public string Address { get; set; } = null!;
 
@@ -25,18 +25,19 @@ namespace HouseRentingSystem.Core.Models.House
         public string Description { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredMessage)]
-        [Display(Name ="Image URL")]
+        [Display(Name = "Image URL")]
         public string ImageUrl { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredMessage)]
         [Range(typeof(decimal),
             HousePricePerMonthMinValue,
             HousePricePerMonthMaxValue,
-            ErrorMessage ="Price per month must be a positive number and less than {2} level")]
-        [Display(Name ="Price Per Month")]
+            ConvertValueInInvariantCulture = true,
+            ErrorMessage = "Price per month must be a positive number and less than {2} level")]
+        [Display(Name = "Price Per Month")]
         public decimal PricePerMonth { get; set; }
 
-        [Display(Name ="Category")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public IEnumerable<HouseCategoryServiceModel> Categories { get; set; } = new List<HouseCategoryServiceModel>();
     }
