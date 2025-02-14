@@ -9,7 +9,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
     public class Category
     {
         [Key]
-        [Comment("Categoru Identifier")]
+        [Comment("Category Identifier")]
         public int Id { get; set; }
 
         [Required]
