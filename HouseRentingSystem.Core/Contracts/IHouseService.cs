@@ -21,5 +21,8 @@ namespace HouseRentingSystem.Core.Contracts
         Task<IEnumerable<HouseServiceModel>> AllHousesByUserIdAsync(string userId);
         Task<bool> ExistAsync(int id);
         Task<HouseDetailsServiceModel> HouseDetailsByIdAsync(int id);
+        Task EditAsync(HouseFormModel model, int houseId);
+        Task<bool> HasAgentWithIdAsync(int houseId,string userId);
+        Task<HouseFormModel?> GetHouseFormModelByIdAsync(int id);
     }
 }
