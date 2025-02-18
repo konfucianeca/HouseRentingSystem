@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿//Here we use Unit of Work in Repository Pattern in ASP.NET Core MVC using EF Core
+using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentingSystem.Infrastructure.Data.Common
 {
@@ -11,11 +12,12 @@ namespace HouseRentingSystem.Infrastructure.Data.Common
             context = _context;
         }
 
-        private DbSet<T> DbSet<T>()  where T : class //returns the database table
-        {                                            //corresponding to this DbSet
+        //Set<T>() returns a table set for the given entity type
+        private DbSet<T> DbSet<T>() where T : class
+        {
             return context.Set<T>();
         }
-        public IQueryable<T> All<T>() where T : class 
+        public IQueryable<T> All<T>() where T : class
         {
             return DbSet<T>();
         }
@@ -38,6 +40,16 @@ namespace HouseRentingSystem.Infrastructure.Data.Common
         public async Task<T?> GetByIdAsync<T>(object id) where T : class
         {
             return await DbSet<T>().FindAsync(id);
+        }
+
+        public async Task DeleteAsync<T>(object id) where T : class
+        {
+            T? entity = await GetByIdAsync<T>(id);
+
+            if (entity != null)
+            {
+                DbSet<T>().Remove(entity);
+            }
         }
     }
 }

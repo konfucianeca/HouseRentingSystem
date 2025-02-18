@@ -30,14 +30,14 @@ namespace HouseRentingSystem.Controllers
         {
             if (await agentService.UserWithPhoneNumberExistsAsync(model.PhoneNumber))
             {
-                ModelState.AddModelError(nameof(model.PhoneNumber), HasRents);
+                ModelState.AddModelError("Error", PhoneExists);
             }
 
             if (await agentService.UserHasRentsAsync(User.Id()))
             {
-                ModelState.AddModelError("Error", PhoneExists);
+                ModelState.AddModelError(nameof(model.PhoneNumber), HasRents);
             }
-
+            
             if (ModelState.IsValid == false)
             {
                 return View(model);
