@@ -24,7 +24,7 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error/500");
-    app.UseStatusCodePagesWithReExecute("/Home/Error","?statusCode={0}");
+    app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
     app.UseHsts();
 }
 
@@ -36,8 +36,16 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapDefaultControllerRoute();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "House Details",
+        pattern: "/House/Details/{id}/{information}",
+        defaults: new { Contoller = "House", Action = "Details" }
+    );
 
-app.MapRazorPages();
+    app.MapDefaultControllerRoute();
+    app.MapRazorPages();
+});
 
 await app.RunAsync();
