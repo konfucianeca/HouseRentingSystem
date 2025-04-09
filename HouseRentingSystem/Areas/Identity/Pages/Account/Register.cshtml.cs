@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using static HouseRentingSystem.Infrastructure.Constants.DataConstants;
+using static HouseRentingSystem.Core.Constants.CustomClaims;
 
 namespace HouseRentingSystem.Areas.Identity.Pages.Account
 {
@@ -59,18 +60,6 @@ namespace HouseRentingSystem.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [Display(Name = "First Name")]
-            [StringLength(UserFirstNameMaxLength,
-                MinimumLength = UserFirstNameMinLength)]
-            public string FirstName { get; set; }
-
-            [Required]
-            [Display(Name = "Last Name")]
-            [StringLength(UserLastNameMaxLength,
-                MinimumLength = UserLastNameMinLength)]
-            public string LastName { get; set; }
-
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -89,6 +78,18 @@ namespace HouseRentingSystem.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "First Name")]
+            [StringLength(UserFirstNameMaxLength,
+               MinimumLength = UserFirstNameMinLength)]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            [StringLength(UserLastNameMaxLength,
+                MinimumLength = UserLastNameMinLength)]
+            public string LastName { get; set; }
         }
 
 
@@ -107,12 +108,14 @@ namespace HouseRentingSystem.Areas.Identity.Pages.Account
 
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+                user.UserName = $"{Input.FirstName}{Input.LastName}";
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim(UserFullNameClaim, $"{user.FirstName} {user.LastName}"));
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)
