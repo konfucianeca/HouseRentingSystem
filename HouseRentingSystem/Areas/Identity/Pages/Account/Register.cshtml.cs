@@ -115,7 +115,7 @@ namespace HouseRentingSystem.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim(UserFullNameClaim, $"{user.FirstName} {user.LastName}"));
+                    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim(UserFullNameClaimType, $"{user.FirstName} {user.LastName}"));
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)
