@@ -52,6 +52,9 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         public Agent Agent { get; set; } = null!;
 
         [Comment("User Id of the renterer")]
-        public string? RenterId { get; set; } 
+        public string? RenterId { get; set; }
+
+        [Comment("Is house approved by administrator")]
+        public bool IsApproved { get; set; }
     }
 }
