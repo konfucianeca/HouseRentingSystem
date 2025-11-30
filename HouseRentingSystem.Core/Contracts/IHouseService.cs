@@ -15,7 +15,7 @@ namespace HouseRentingSystem.Core.Contracts
             string? searchTerm = null,
             HouseSorting sorting = HouseSorting.Newest,
             int currentPage = 1,
-            int housePerPage = 1);
+            int housesPerPage = 1);
         Task<IEnumerable<string>> AllCategoriesNamesAsync();
         Task<IEnumerable<HouseServiceModel>> AllHousesByAgentIdAsync(int agentId);
         Task<IEnumerable<HouseServiceModel>> AllHousesByUserIdAsync(string userId);

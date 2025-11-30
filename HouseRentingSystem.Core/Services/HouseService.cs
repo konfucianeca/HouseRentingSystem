@@ -24,7 +24,7 @@ namespace HouseRentingSystem.Core.Services
             int housesPerPage = 1)
         {
             var housesToShow = repository.AllReadOnly<House>()
-                .Where(h=>h.IsApproved);
+                .Where(h => h.IsApproved);
 
             if (category != null)
             {
@@ -44,9 +44,9 @@ namespace HouseRentingSystem.Core.Services
             housesToShow = sorting switch
             {
                 HouseSorting.Price => housesToShow
-                    .OrderBy(h => h.PricePerMonth),
+                    .OrderByDescending(h => h.PricePerMonth),
                 HouseSorting.NotRentedFirst => housesToShow
-                    .OrderBy(h => h.RenterId != null)
+                    .OrderBy(h => h.RenterId == null)
                     .ThenByDescending(h => h.Id),
                 _ => housesToShow
                     .OrderByDescending(h => h.Id)
@@ -59,11 +59,11 @@ namespace HouseRentingSystem.Core.Services
                 .ToListAsync();
 
             int totalHouses = await housesToShow.CountAsync();
-
+            
             return new HouseQueryServiceModel()
             {
-                Houses = houses,
-                TotalHousesCount = totalHouses
+                TotalHousesCount = totalHouses,
+                Houses = houses
             };
         }
 
@@ -89,7 +89,7 @@ namespace HouseRentingSystem.Core.Services
         public async Task<IEnumerable<HouseServiceModel>> AllHousesByAgentIdAsync(int agentId)
         {
             return await repository.AllReadOnly<House>()
-                .Where(h=>h.IsApproved)
+                .Where(h => h.IsApproved)
                 .Where(h => h.AgentId == agentId)
                 .ProjectToHouseServiceModel()
                 .ToListAsync();
