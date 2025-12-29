@@ -2,7 +2,7 @@
 
 namespace HouseRentingSystem.Core.Models.House
 {
-    public class HouseDetailsViewModel:IHouseModel
+    public class HouseDetailsViewModel : IHouseModel
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;

@@ -7,7 +7,7 @@ namespace HouseRentingSystem.Core.Extensions
     {
         public static string GetInformation(this IHouseModel house)
         {
-            string info = house.Title.Replace(" ", "-") + GetAddress(house.Address);
+            string info = house.Title.Replace(" ", "-") + "-" + GetAddress(house.Address);
             info = Regex.Replace(info, @"[^a-zA-Z0-9\-]", string.Empty);
 
             return info;

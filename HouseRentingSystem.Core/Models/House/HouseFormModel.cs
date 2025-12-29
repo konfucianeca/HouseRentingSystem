@@ -5,7 +5,7 @@ using static HouseRentingSystem.Infrastructure.Constants.DataConstants;
 
 namespace HouseRentingSystem.Core.Models.House
 {
-    public class HouseFormModel:IHouseModel
+    public class HouseFormModel : IHouseModel
     {
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(HouseTitleMaxLength,

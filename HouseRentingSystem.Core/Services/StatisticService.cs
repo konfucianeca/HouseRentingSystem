@@ -16,11 +16,11 @@ namespace HouseRentingSystem.Core.Services
         public async Task<StatisticServiceModel> TotalAsync()
         {
             int totalHouses = await repository.AllReadOnly<House>()
-                .Where(h=>h.IsApproved)
+                .Where(h => h.IsApproved)
                 .CountAsync();
 
-            int totalRents= await repository.AllReadOnly<House>()
-                .Where(h=>h.RenterId!=null)
+            int totalRents = await repository.AllReadOnly<House>()
+                .Where(h => h.RenterId != null)
                 .CountAsync();
 
             return new StatisticServiceModel()
