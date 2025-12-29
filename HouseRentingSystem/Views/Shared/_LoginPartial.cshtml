@@ -7,6 +7,7 @@
 @{
     string userName = string.Empty;
 
+
     if (SignInManager.IsSignedIn(User))
     {
         userName = User.FindFirstValue(HouseRentingSystem.Core.Constants.CustomClaims.UserFullNameClaimType) ?? string.Empty;
