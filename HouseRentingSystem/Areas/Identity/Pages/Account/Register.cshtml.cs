@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using static HouseRentingSystem.Infrastructure.Constants.DataConstants;
-using static HouseRentingSystem.Core.Constants.CustomClaims;
+using static HouseRentingSystem.Infrastructure.Constants.CustomClaims;
 
 namespace HouseRentingSystem.Areas.Identity.Pages.Account
 {
