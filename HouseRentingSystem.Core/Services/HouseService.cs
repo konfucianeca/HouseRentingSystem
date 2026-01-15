@@ -5,6 +5,7 @@ using HouseRentingSystem.Core.Models.House;
 using HouseRentingSystem.Infrastructure.Data.Common;
 using HouseRentingSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace HouseRentingSystem.Core.Services
 {
@@ -59,7 +60,7 @@ namespace HouseRentingSystem.Core.Services
                 .ToListAsync();
 
             int totalHouses = await housesToShow.CountAsync();
-            
+
             return new HouseQueryServiceModel()
             {
                 TotalHousesCount = totalHouses,
@@ -191,8 +192,8 @@ namespace HouseRentingSystem.Core.Services
         public async Task<HouseDetailsServiceModel> HouseDetailsByIdAsync(int id)
         {
             return await repository.AllReadOnly<House>()
-                .Where(h => h.IsApproved)
                 .Where(h => h.Id == id)
+                //.Where(h => h.IsApproved)
                 .Select(h => new HouseDetailsServiceModel()
                 {
                     Id = h.Id,
@@ -212,7 +213,6 @@ namespace HouseRentingSystem.Core.Services
                 })
                 .FirstAsync();
         }
-
         public async Task<bool> IsRentedAsync(int id)
         {
             bool isRented = false;

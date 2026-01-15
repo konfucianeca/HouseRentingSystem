@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HouseRentingSystem.Core.Constants
+﻿namespace HouseRentingSystem.Core.Constants
 {
     public static class MessageConstants
     {
@@ -12,5 +6,7 @@ namespace HouseRentingSystem.Core.Constants
         public const string StringLengthMessage = "The field {0} must be between {2} and {1} characters long";
         public const string PhoneExists = "Phone number already exists. Enter another one";
         public const string HasRents = "You should have no rents to become an agent";
+        public const string UserMessageSuccess = "UserMessageSuccess";
+        public const string UserMessageError = "UserMessageError";
     }
 }
