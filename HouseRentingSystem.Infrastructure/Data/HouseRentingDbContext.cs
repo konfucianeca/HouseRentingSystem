@@ -12,18 +12,19 @@ namespace HouseRentingSystem.Infrastructure.Data
         {
         }
 
-        public DbSet<Agent> Agents { get; set; } = null!;
-        public DbSet<Category> Categories { get; set; } = null!;
-        public DbSet<House> Houses { get; set; } = null!;
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new AgentConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new HouseConfiguration());
+            builder.ApplyConfiguration(new UserClaimsConfiguration());
 
             base.OnModelCreating(builder);
         }
+
+        public DbSet<Agent> Agents { get; set; } = null!;
+        public DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<House> Houses { get; set; } = null!;
     }
 }
