@@ -1,6 +1,6 @@
 ﻿using HouseRentingSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
-using static HouseRentingSystem.Core.Constants.RoleConstants;
+using static HouseRentingSystem.Core.Constants.AdministratorConstants;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -12,9 +12,9 @@ namespace Microsoft.AspNetCore.Builder
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            if (userManager != null && roleManager != null && await roleManager.RoleExistsAsync(AdminRole) == false)
+            if (userManager != null && roleManager != null && await roleManager.RoleExistsAsync(AdminRoleName) == false)
             {
-                var role = new IdentityRole(AdminRole);
+                var role = new IdentityRole(AdminRoleName);
                 await roleManager.CreateAsync(role);
 
                 var admin = await userManager.FindByEmailAsync("admin@mail.com");

@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using static HouseRentingSystem.Core.Constants.RoleConstants;
+using static HouseRentingSystem.Core.Constants.AdministratorConstants;
 
 namespace HouseRentingSystem.Extensions
 {
@@ -12,7 +12,7 @@ namespace HouseRentingSystem.Extensions
 
         public static bool IsAdmin(this ClaimsPrincipal user)
         {
-            return user.IsInRole(AdminRole);
+            return user.IsInRole(AdminRoleName);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using HouseRentingSystem.Core.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static HouseRentingSystem.Core.Constants.AdministratorConstants;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -19,6 +20,11 @@ namespace HouseRentingSystem.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
+            if (User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("DashBoard", "Home", new { area = "Admin" });
+            }
+
             var model = await houseService.LastThreeHousesAsync();
 
             return View(model);

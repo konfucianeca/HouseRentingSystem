@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using static HouseRentingSystem.Core.Constants.RoleConstants;
+using static HouseRentingSystem.Core.Constants.AdministratorConstants;
 
 namespace HouseRentingSystem.Areas.Identity.Pages.Account
 {
@@ -98,7 +98,7 @@ namespace HouseRentingSystem.Areas.Identity.Pages.Account
                 {
                     var user = await _userManager.FindByEmailAsync(Input.Email);
 
-                    if (await _userManager.IsInRoleAsync(user, AdminRole))
+                    if (await _userManager.IsInRoleAsync(user, AdminRoleName))
                     {
                         return RedirectToAction("DashBoard", "Home", new { area = "Admin" });
                     }
