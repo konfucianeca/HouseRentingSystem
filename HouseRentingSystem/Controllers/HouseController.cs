@@ -5,6 +5,8 @@ using HouseRentingSystem.Core.Models.House;
 using HouseRentingSystem.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using static HouseRentingSystem.Core.Constants.AdministratorConstants;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -13,14 +15,17 @@ namespace HouseRentingSystem.Controllers
         private readonly IHouseService houseService;
         private readonly IAgentService agentService;
         private readonly ILogger logger;
+        private readonly IMemoryCache memoryCache;
         public HouseController(
             IHouseService _houseService,
             IAgentService _agentService,
-            ILogger<HouseController> _logger)
+            ILogger<HouseController> _logger,
+            IMemoryCache _memoryCache)
         {
             houseService = _houseService;
             agentService = _agentService;
             logger = _logger;
+            memoryCache = _memoryCache;
         }
 
         [AllowAnonymous]
@@ -228,6 +233,8 @@ namespace HouseRentingSystem.Controllers
 
             await houseService.RentAsync(id, User.Id());
 
+            memoryCache.Remove(RentsCacheKey);
+
             return RedirectToAction(nameof(All));
         }
 
@@ -242,6 +249,7 @@ namespace HouseRentingSystem.Controllers
             try
             {
                 await houseService.LeaveAsync(id, User.Id());
+                memoryCache.Remove(RentsCacheKey);
             }
             catch (UnauthorizedAccessException uae)
             {
