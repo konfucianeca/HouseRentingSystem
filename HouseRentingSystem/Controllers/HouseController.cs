@@ -115,6 +115,8 @@ namespace HouseRentingSystem.Controllers
 
             int newHouseId = await houseService.CreateAsync(model, agentId ?? 0);
 
+            TempData["Message"] = "You have successfully added a house!";
+
             return RedirectToAction(nameof(Details), new { id = newHouseId, information = model.GetInformation() });
         }
 
@@ -165,6 +167,8 @@ namespace HouseRentingSystem.Controllers
 
             await houseService.EditAsync(model, id);
 
+            TempData["Message"] = "You have successully edited a house!";
+
             return RedirectToAction(nameof(Details), new { id, information = model.GetInformation() });
         }
 
@@ -210,6 +214,8 @@ namespace HouseRentingSystem.Controllers
 
             await houseService.DeleteAsync(model.Id);
 
+            TempData["Message"] = "You have successully deleted a house!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -235,6 +241,8 @@ namespace HouseRentingSystem.Controllers
 
             memoryCache.Remove(RentsCacheKey);
 
+            TempData["Message"] = "You have successfully rentd a house!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -250,6 +258,7 @@ namespace HouseRentingSystem.Controllers
             {
                 await houseService.LeaveAsync(id, User.Id());
                 memoryCache.Remove(RentsCacheKey);
+                TempData["Message"] = "You have successfully left the house!";
             }
             catch (UnauthorizedAccessException uae)
             {
