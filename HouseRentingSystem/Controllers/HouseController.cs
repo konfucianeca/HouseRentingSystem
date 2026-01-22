@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using static HouseRentingSystem.Core.Constants.AdministratorConstants;
+using static HouseRentingSystem.Core.Constants.MessageConstants;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -115,7 +116,7 @@ namespace HouseRentingSystem.Controllers
 
             int newHouseId = await houseService.CreateAsync(model, agentId ?? 0);
 
-            TempData["Message"] = "You have successfully added a house!";
+            TempData[UserMessageSuccess] = "You have successfully added a house!";
 
             return RedirectToAction(nameof(Details), new { id = newHouseId, information = model.GetInformation() });
         }
@@ -167,7 +168,7 @@ namespace HouseRentingSystem.Controllers
 
             await houseService.EditAsync(model, id);
 
-            TempData["Message"] = "You have successully edited a house!";
+            TempData[UserMessageSuccess] = "You have successully edited a house!";
 
             return RedirectToAction(nameof(Details), new { id, information = model.GetInformation() });
         }
@@ -214,13 +215,13 @@ namespace HouseRentingSystem.Controllers
 
             await houseService.DeleteAsync(model.Id);
 
-            TempData["Message"] = "You have successully deleted a house!";
+            TempData[UserMessageSuccess] = "You have successully deleted a house!";
 
             return RedirectToAction(nameof(All));
         }
 
         [HttpPost]
-        public async Task<IActionResult> RentAsync(int id)
+        public async Task<IActionResult> Rent(int id)
         {
             if (await houseService.ExistAsync(id) == false)
             {
@@ -241,7 +242,7 @@ namespace HouseRentingSystem.Controllers
 
             memoryCache.Remove(RentsCacheKey);
 
-            TempData["Message"] = "You have successfully rentd a house!";
+            TempData[UserMessageSuccess] = "You have successfully rented a house!";
 
             return RedirectToAction(nameof(All));
         }
@@ -258,7 +259,7 @@ namespace HouseRentingSystem.Controllers
             {
                 await houseService.LeaveAsync(id, User.Id());
                 memoryCache.Remove(RentsCacheKey);
-                TempData["Message"] = "You have successfully left the house!";
+                TempData[UserMessageSuccess] = "You have successfully left the house!";
             }
             catch (UnauthorizedAccessException uae)
             {
@@ -266,7 +267,6 @@ namespace HouseRentingSystem.Controllers
 
                 return Unauthorized();
             }
-
 
             return RedirectToAction(nameof(All));
         }
