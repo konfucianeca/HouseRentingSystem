@@ -9,7 +9,7 @@ namespace HouseRentingSystem.Core.Models.Admin.User
         public string Email { get; set; } = string.Empty;
 
         [Display(Name ="Phone Number")]
-        public string? PhoneNumber { get; set; } = string.Empty;
+        public string? PhoneNumber { get; set; } 
         public bool IsAgent { get; set; }
     }
 }

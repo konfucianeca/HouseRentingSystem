@@ -10,7 +10,7 @@ namespace HouseRentingSystem.Areas.Admin.Controllers
         }
         public async Task<IActionResult> ForReview()
         {
-            return View();
+            return RedirectToAction("Approve", "House");
         }
     }
 }
